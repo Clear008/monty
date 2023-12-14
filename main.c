@@ -5,39 +5,61 @@
  *@argc: number of command line argument
  * Return: Always 0.
  */
-globalVar_t globalVar;
 int main(int argc, char *argv[])
 {
-    char *line = NULL, *opcode, *arg;
+     char *line = NULL;
+     int i;
     size_t len = 0;
-    ssize_t read;
     stack_t *stack = NULL;
-
-    unsigned int line_number = 0;
-    FILE *file;
-
+    FILE *file = fopen(argv[1], "r");
     if (argc != 2)
     {
-        fprintf(stderr, "USAGE: monty file\n");
+        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
-    file = fopen(argv[1], "r");
-    if (file == NULL)
+    
+    if (!file)
     {
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
 
-    while ((read = getline(&line, &len, file)) != -1)
+   
+
+    while (getline(&line, &len, file) != -1)
     {
-        line_number++;
-        wparse_line(line, &opcode, &arg);
-        w_execInstru(opcode, &stack, line_number);
+        char *opcode = strtok(line, " \n\t");
+
+        if (opcode)
+        {
+      
+            instruction_t instructions[] = {
+                {"push", w_push},
+                {"pall", w_pall},
+                {NULL, NULL}};
+
+            i = 0;
+            while (instructions[i].opcode)
+            {
+                if (strcmp(opcode, instructions[i].opcode) == 0)
+                {
+                    instructions[i].f(&stack, 0);
+                    break;
+                }
+                i++;
+            }
+
+            if (!instructions[i].opcode)
+            {
+                fprintf(stderr, "L%d: unknown instruction %s\n", 0, opcode);
+                exit(EXIT_FAILURE);
+            }
+        }
     }
 
     free(line);
     fclose(file);
 
-    return EXIT_SUCCESS;
+    return 0;
 }

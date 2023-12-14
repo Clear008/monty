@@ -1,39 +1,48 @@
 #include "monty.h"
+
 /**
  *w_push - function that pushes an element to the stack.
  *@stack: stack that will be filled
  *@line_number: line number
 */
 
-void w_push(stack_t **stack, unsigned int line_number, char *arg)
+void w_push(stack_t **stack, unsigned int line_number)
 {
-    int wvalue;
-    stack_t *wn_node;
-
-    if (arg == NULL || !w_isdigit(arg))
+    char *value;
+    stack_t *new_node;
+    if (!stack || !*stack)
     {
-        w_error_handle("usage: push integer", line_number);
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
     }
 
-    wvalue = atoi(arg);
-    wn_node = malloc(sizeof(stack_t));
-
-    if (wn_node == NULL)
+    new_node = malloc(sizeof(stack_t));
+    if (!new_node)
     {
-        w_error_handle("malloc failed", line_number);
+        fprintf(stderr, "Error: malloc failed\n");
+        exit(EXIT_FAILURE);
     }
 
-    wn_node->n = wvalue;
-    wn_node->prev = NULL;
-    wn_node->next = *stack;
-
-    if (*stack != NULL)
+   
+    value = strtok(NULL, " \n\t");
+    if (!value || (*value == '-' && !isdigit(value[1])) || !isdigit(*value))
     {
-        (*stack)->prev = wn_node;
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        free(new_node);
+        exit(EXIT_FAILURE);
     }
 
-    *stack = wn_node;
+    new_node->n = atoi(value);
+    new_node->prev = NULL;
+    new_node->next = *stack;
+
+    if (*stack)
+        (*stack)->prev = new_node;
+
+    *stack = new_node;
+
 }
+
 /**
  *w_pall - prints all the values on the stack,
  *starting from the top of the stack..
@@ -41,11 +50,10 @@ void w_push(stack_t **stack, unsigned int line_number, char *arg)
  *@line_number: line number
  *@arg: arguments
 */
-void w_pall(stack_t **stack, unsigned int line_number, char *arg)
+void w_pall(stack_t **stack, unsigned int line_number)
 {
 stack_t *wcrt = *stack;
 (void)line_number;
-(void)arg;
 while (wcrt != NULL)
 {
 printf("%d\n", wcrt->n);
