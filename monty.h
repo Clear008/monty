@@ -39,10 +39,23 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number, char *arg);
 } instruction_t;
 
+/**
+ * struct global_s - global variable structure
+ * @arg: arguments
+ *
+ * Description: Declaration of global varibale
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct global_s
+{
+char *arg;
+} globalVar_t;
+
+globalVar_t globalVar;
 
 /* Instructions */
-void w_push(stack_t **stack, unsigned int line_number, char *arg);
-void w_pall(stack_t **stack, unsigned int line_number, char *arg);
+void w_push(stack_t **stack, unsigned int line_number);
+void w_pall(stack_t **stack, unsigned int line_number);
 
 
 /* Error handler */
@@ -52,7 +65,8 @@ void w_error_handle(const char *w_nt, unsigned int line_number);
 /* Other funtions */
 int w_isdigit(char *wstr);
 void wparse_line(char *line, char **opcode, char **arg);
-void w_execInstru(char *oc, char *arg, stack_t **stack, unsigned int ln);
-void wcheck_oc(char *oc, char *arg, stack_t **stack, unsigned int ln);
-
+void w_execInstru(char *oc, stack_t **stack, unsigned int ln);
+void wcheck_oc(char *oc, stack_t **stack, unsigned int ln);
+void w_pall_wrapper(stack_t **stack, unsigned int ln, char *arg);
+void w_push_wrapper(stack_t **stack, unsigned int ln, char *arg);
 #endif

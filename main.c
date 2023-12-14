@@ -31,8 +31,8 @@ while ((ssize_t)(read = getline(&line, &len, file)) != -1)
 {
 line_number++;
 wparse_line(line, &opcode, &arg);
-w_execInstru(opcode, arg, &stack, line_number);
-wcheck_oc(opcode, arg, &stack, line_number);
+w_execInstru(opcode, &stack, line_number);
+wcheck_oc(opcode, &stack, line_number);
 }
 
 free(line);
