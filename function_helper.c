@@ -16,10 +16,10 @@ int w_exet(char *content, stack_t **stack, unsigned int count, FILE *file)
 	unsigned int i = 0;
 	char *op;
 
-	op = strtok(content, " \n\t");
+	op = strtok(content, " $\n\t");
 	if (op && op[0] == '#')
 		return (0);
-	gv.arg = strtok(NULL, " \n\t");
+	gv.arg = strtok(NULL, " $\n\t");
 	while (wopc[i].opcode && op)
 	{
 		if (strcmp(op, wopc[i].opcode) == 0)
