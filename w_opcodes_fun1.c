@@ -23,13 +23,30 @@ wcrt = wcrt->next;
  */
 void w_pint(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		fclose(gv.file);
-		free(gv.ctt);
-		cleanup(stack);
-		exit(EXIT_FAILURE);
-	}
-	printf("%d\n", (*stack)->n);
+if (!stack || !*stack)
+{
+fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+exit(EXIT_FAILURE);
+}
+printf("%d\n", (*stack)->n);
+}
+
+/**
+ * w_pop - removes the top element of the stack
+ * @stack: pointer to the head of the stack
+ * @line_number: line number
+ */
+void w_pop(stack_t **stack, unsigned int line_number)
+{
+stack_t *t;
+if (!stack || !*stack)
+{
+fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+exit(EXIT_FAILURE);
+}
+t = *stack;
+*stack = t->next;
+if (*stack)
+(*stack)->prev = NULL;
+free(t);
 }
