@@ -11,21 +11,21 @@
 #include <ctype.h>
 
 /**
- * struct bus_s - variables -args, file, line content
+ * struct gv_s - variables -args, file, line content
  * @arg: value
  * @file: pointer to monty file
- * @content: line content
- * @lifi: flag change stack <-> queue
- * Description: carries values through the program
+ * @ctt: line content
+ * @wlifi: last in first out
+ * Description: carries values
  */
-typedef struct bus_s
+typedef struct gv_s
 {
 	char *arg;
 	FILE *file;
-	char *content;
-	int lifi;
-}  bus_t;
-extern bus_t bus;
+	char *ctt;
+	int wlifi;
+}  gv_t;
+extern gv_t gv;
 
 
 /**
@@ -69,13 +69,12 @@ void w_pall(stack_t **stack, unsigned int line_number);
 
 
 /* others */
-int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
+int w_exet(char *content, stack_t **stack, unsigned int count, FILE *file);
 void cleanup(stack_t **stack);
 
 
-void addqueue(stack_t **head, int n);
-void f_queue(stack_t **head, unsigned int counter);
-void addnode(stack_t **head, int n);
+void w_addq(stack_t **head, int wn);
+void w_adds(stack_t **head, int wn);
 
 
 
