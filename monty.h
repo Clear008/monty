@@ -27,7 +27,6 @@ typedef struct gv_s
 }  gv_t;
 extern gv_t gv;
 
-
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer

@@ -10,7 +10,9 @@ void w_push(stack_t **stack, unsigned int line_number)
 if (gv.arg)
 {
 		if (gv.arg[0] == '-')
+{
 			j++;
+}
 for (; gv.arg[j] != '\0'; j++)
 {
 if (!isdigit(gv.arg[j]))

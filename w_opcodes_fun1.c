@@ -23,10 +23,13 @@ wcrt = wcrt->next;
  */
 void w_pint(stack_t **stack, unsigned int line_number)
 {
-if (!stack || !*stack)
-{
-fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-exit(EXIT_FAILURE);
-}
-printf("%d\n", (*stack)->n);
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		fclose(gv.file);
+		free(gv.ctt);
+		cleanup(stack);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }
