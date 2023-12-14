@@ -35,7 +35,7 @@ execute(content, &stack, counter, file);
 free(content);
 content = NULL;
 }
-cleanup(stack);
+cleanup(&stack);
 	fclose(file);
 return (0);
 }

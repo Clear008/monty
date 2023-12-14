@@ -70,9 +70,12 @@ void w_pall(stack_t **stack, unsigned int line_number);
 
 /* others */
 int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
-void cleanup(stack_t *stack);
+void cleanup(stack_t **stack);
 
 
+void addqueue(stack_t **head, int n);
+void f_queue(stack_t **head, unsigned int counter);
+void addnode(stack_t **head, int n);
 
 
 
