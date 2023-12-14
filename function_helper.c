@@ -11,7 +11,7 @@ int w_exet(char *content, stack_t **stack, unsigned int count, FILE *file)
 {
 	instruction_t wopc[] = {
 				{"push", w_push}, {"pall", w_pall}, {"pint", w_pint},
-{"pop", w_pop}, {"swap", w_swap}, {"add", w_add},
+{"pop", w_pop}, {"swap", w_swap}, {"add", w_add}, {"nop", w_nop},
 			    {NULL, NULL}
 				};
 	unsigned int i = 0;
