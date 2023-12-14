@@ -1,4 +1,5 @@
 #include "monty.h"
+bus_t bus = {NULL, NULL, NULL, 0};
 /**
  *main - check the code
  *@argv: array of command line argument

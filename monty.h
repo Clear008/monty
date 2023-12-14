@@ -4,10 +4,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
 #include <ctype.h>
-
 
 /**
  * struct bus_s - variables -args, file, line content
@@ -24,8 +25,6 @@ typedef struct bus_s
 	char *content;
 	int lifi;
 }  bus_t;
-
-
 extern bus_t bus;
 
 
