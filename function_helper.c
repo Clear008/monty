@@ -35,7 +35,7 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 	{ fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
 		fclose(file);
 		free(content);
-		cleanup(stack);
+		cleanup(*stack);
 		exit(EXIT_FAILURE); }
 	return (1);
 }
@@ -45,16 +45,15 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
  * cleanup - Frees the memory allocated for the stack.
  * @stack: Double pointer to the stack.
  */
-void cleanup(stack_t **stack)
+void cleanup(stack_t *stack)
 {
-stack_t *current = *stack;
-stack_t *next;
+	stack_t *aux;
 
-while (current != NULL)
-{
-next = current->next;
-free(current);
-current = next;
-}
-*stack = NULL;
+	aux = stack;
+	while (stack)
+	{
+		aux = stack->next;
+		free(stack);
+	 stack = aux;
+	}
 }
