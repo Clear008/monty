@@ -50,3 +50,33 @@ if (*stack)
 (*stack)->prev = NULL;
 free(t);
 }
+
+/**
+ * w_swap - swaps the top two elements of the stack
+ * @stack: pointer to the stack
+ * @line_number: line number
+ */
+void w_swap(stack_t **stack, unsigned int line_number)
+{
+stack_t *wfst, *wscd;
+
+if (!stack || !*stack || !(*stack)->next)
+{
+fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+exit(EXIT_FAILURE);
+}
+wfst = *stack;
+wscd = wfst->next;
+
+wfst->prev = wscd;
+wfst->next = wscd->next;
+
+wscd->prev = NULL;
+wscd->next = wfst;
+
+if (wfst->next)
+wfst->next->prev = wfst;
+
+*stack = wscd;
+}
+

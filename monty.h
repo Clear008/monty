@@ -67,6 +67,7 @@ void w_push(stack_t **stack, unsigned int line_number);
 void w_pall(stack_t **stack, unsigned int line_number);
 void w_pint(stack_t **stack, unsigned int line_number);
 void w_pop(stack_t **stack, unsigned int line_number);
+void w_swap(stack_t **stack, unsigned int line_number);
 
 
 /* others */
