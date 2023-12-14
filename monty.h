@@ -44,13 +44,14 @@ void (*f)(stack_t **stack, unsigned int line_number);
 void w_push(stack_t **stack, unsigned int line_number);
 void w_pall(stack_t **stack, unsigned int line_number);
 
-/* Other funtions */
-void w_error_handle(const char *w_nt, unsigned int line_number);
-int w_isdigit(char *wstr);
-void w_parse_line(char *line, char **opcode);
-void w_exec_instru(char *opcode, stack_t **stack, unsigned int line_number);
-void wcheck_oc(char *oc, stack_t **stack, unsigned int ln, instruction_t *instructions);
-void w_push_wrapper(stack_t **stack, unsigned int ln, char *arg);
-void w_pall_wrapper(stack_t **stack, unsigned int ln, char *arg);
+
+/* others */
+void processFile(FILE *file, stack_t **stack);
+void cleanup(stack_t **stack);
+
+
+
+
+
 
 #endif
