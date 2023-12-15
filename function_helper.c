@@ -4,10 +4,10 @@
 * @stack: head linked list - stack
 * @line_number: line_counter
 * @file: poiner to monty file
-* @content: line content
+* @ctt: line content
 * Return: to 1
 */
-int w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file)
+int w_exet(char *ctt, stack_t **stack, unsigned int line_number, FILE *file)
 {
 	instruction_t wopc[] = {
 				{"push", w_push}, {"pall", w_pall}, {"pint", w_pint},
@@ -17,21 +17,23 @@ int w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file)
 	unsigned int i = 0;
 	char *w_op;
 
-	w_op = strtok(content, " $\n\t");
+	w_op = strtok(ctt, " $\n\t");
 	if (w_op && w_op[0] == '#')
 		return (0);
 	gv.arg = strtok(NULL, " $\n\t");
 for (; wopc[i].opcode && w_op; i++)
 {
 if (strcmp(w_op, wopc[i].opcode) == 0)
+{
 wopc[i].f(stack, line_number);
 return (0);
+}
 }
 
 	if (w_op && wopc[i].opcode == NULL)
 	{ fprintf(stderr, "L%d: unknown instruction %s\n", line_number, w_op);
 		fclose(file);
-		free(content);
+		free(ctt);
 		cleanup(stack);
 		exit(EXIT_FAILURE); }
 	return (1);
