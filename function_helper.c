@@ -21,7 +21,7 @@ int w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file)
 	if (w_op && w_op[0] == '#')
 		return (0);
 	gv.arg = strtok(NULL, " $\n\t");
-for (i = 0; wopc[i].opcode && w_op; i++)
+for (; wopc[i].opcode && w_op; i++)
 {
 if (strcmp(w_op, wopc[i].opcode) == 0)
 {
