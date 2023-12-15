@@ -56,5 +56,4 @@ free(current);
 current = next;
 }
 *stack = NULL;
-free(gv.arg);
 }
