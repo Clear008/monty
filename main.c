@@ -34,6 +34,7 @@ counter++;
 w_exet(content, &stack, counter, file);
 free(content);
 content = NULL;
+size = 0;
 }
 cleanup(&stack);
 fclose(file);
