@@ -24,10 +24,8 @@ int w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file)
 for (; wopc[i].opcode && w_op; i++)
 {
 if (strcmp(w_op, wopc[i].opcode) == 0)
-{
 wopc[i].f(stack, line_number);
 return (0);
-}
 }
 
 	if (w_op && wopc[i].opcode == NULL)
