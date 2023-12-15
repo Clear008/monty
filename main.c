@@ -36,6 +36,6 @@ free(content);
 content = NULL;
 }
 cleanup(&stack);
-	fclose(file);
+fclose(file);
 return (0);
 }
