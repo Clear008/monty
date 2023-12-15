@@ -25,7 +25,7 @@ typedef struct gv_s
 	char *ctt;
 	int wlifi;
 }  gv_t;
-extern gv_t gv;
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -59,7 +59,7 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+extern gv_t gv;
 
 
 /* Instructions */

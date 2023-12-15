@@ -9,9 +9,9 @@ void w_push(stack_t **stack, unsigned int line_number)
 	int n, j = 0, flag = 0;
 if (gv.arg)
 {
-		if (gv.arg[0] == '-')
+if (gv.arg[0] == '-')
 {
-			j++;
+j++;
 }
 for (; gv.arg[j] != '\0'; j++)
 {
