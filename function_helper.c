@@ -7,24 +7,36 @@
 * @content: line content
 * Return: to 1
 */
-void (*w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file))(stack_t **, unsigned int)
+int w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file)
 {
 	instruction_t wopc[] = {
 				{"push", w_push}, {"pall", w_pall}, {"pint", w_pint},
 {"pop", w_pop}, {"swap", w_swap}, {"add", w_add}, {"nop", w_nop},
 			    {NULL, NULL}
 				};
-	unsigned int i;
-	(void)stack;
-	(void)line_number;
-	(void)file;
-    for (i = 0; wopc[i].opcode; i++)
+	unsigned int i = 0;
+	char *w_op;
+
+	w_op = strtok(content, " $\n\t");
+	if (w_op && w_op[0] == '#')
+		return (0);
+	gv.arg = strtok(NULL, " $\n\t");
+	for (i = 0; wopc[i].opcode; i++)
     {
-        if (strcmp(wopc[i].opcode, content) == 0)
-            break;
+        if (strcmp(w_op, wopc[i].opcode) == 0)
+        {
+            wopc[i].f(stack, line_number);
+            return 0;
+        }
     }
 
-    return wopc[i].f;
+	if (w_op && wopc[i].opcode == NULL)
+	{ fprintf(stderr, "L%d: unknown instruction %s\n", line_number, w_op);
+		fclose(file);
+		free(content);
+		cleanup(stack);
+		exit(EXIT_FAILURE); }
+	return (1);
 }
 
 
