@@ -73,7 +73,7 @@ void w_nop(stack_t **stack, unsigned int line_number);
 
 
 /* others */
-int w_exet(char *content, stack_t **stack, unsigned int count, FILE *file);
+void (*w_exet(char *content, stack_t **stack, unsigned int line_number, FILE *file))(stack_t **, unsigned int);
 void cleanup(stack_t **stack);
 
 
