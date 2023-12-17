@@ -55,5 +55,5 @@ next = current->next;
 free(current);
 current = next;
 }
-
+*stack = NULL;
 }

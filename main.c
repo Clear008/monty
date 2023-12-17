@@ -8,12 +8,12 @@ gv_t gv = {NULL, NULL, NULL, 0};
 */
 int main(int argc, char *argv[])
 {
-	char *content;
+	char *wcontent;
 	FILE *file;
 	size_t size = 0;
-	ssize_t read_line = 1;
+	ssize_t r_line = 1;
 	stack_t *stack = NULL;
-	unsigned int counter = 0;
+	unsigned int count = 0;
 
 	if (argc == 1 || argc > 2)
 	{
@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-while ((read_line = getline(&content, &size, file)) > 0)
+while ((r_line = getline(&wcontent, &size, file)) > 0)
 {
-gv.ctt = content;
-counter++;
-w_exet(content, &stack, counter, file);
-free(content);
-content = NULL;
+gv.ctt = wcontent;
+count++;
+w_exet(wcontent, &stack, count, file);
+free(wcontent);
+wcontent = NULL;
 size = 0;
 }
 cleanup(&stack);
